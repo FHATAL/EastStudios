@@ -172,10 +172,10 @@
       });
 
       ctx.lineCap = "round";
-      ctx.strokeStyle = `rgba(23, 32, 26, ${0.13 * o.alpha})`;
+      ctx.strokeStyle = `rgba(10, 10, 10, ${0.11 * o.alpha})`;
       ctx.lineWidth = 1;
       ctx.stroke(minor);
-      ctx.strokeStyle = `rgba(180, 116, 61, ${0.55 * o.alpha})`;
+      ctx.strokeStyle = `rgba(10, 10, 10, ${0.34 * o.alpha})`;
       ctx.lineWidth = 1.5;
       ctx.stroke(major);
     }
@@ -259,12 +259,12 @@
           let r, g, b;
           if (v < waterLevel) {
             const depth = Math.min(1, (waterLevel - v) * 3);
-            r = 168 - depth * 22; g = 203 - depth * 16; b = 213 - depth * 8;
+            r = g = b = 226 - depth * 18;
           } else {
             const e = Math.min(1, (v - waterLevel) / 0.9);
-            r = 238 - e * 8; g = 236 - e * 22; b = 218 - e * 40;
+            r = g = b = 255 - e * 14;
             if (forest(x * 3 * 0.009, y * 3 * 0.009, 2) > 0.12 && e < 0.7) {
-              r -= 18; g -= 6; b -= 24;
+              r = g = b = r - 9;
             }
           }
           d[k] = r; d[k + 1] = g; d[k + 2] = b; d[k + 3] = 255;
@@ -294,18 +294,18 @@
       });
 
       ctx.lineCap = "round";
-      ctx.strokeStyle = "rgba(170, 108, 56, 0.45)";
+      ctx.strokeStyle = "rgba(10, 10, 10, 0.26)";
       ctx.lineWidth = 0.8;
       ctx.stroke(minor);
-      ctx.strokeStyle = "rgba(160, 98, 48, 0.75)";
+      ctx.strokeStyle = "rgba(10, 10, 10, 0.55)";
       ctx.lineWidth = 1.3;
       ctx.stroke(major);
-      ctx.strokeStyle = "rgba(78, 140, 160, 0.9)";
+      ctx.strokeStyle = "rgba(10, 10, 10, 0.75)";
       ctx.lineWidth = 1.1;
       ctx.stroke(shore);
 
       // A thin grid, like a map's coordinate lines
-      ctx.strokeStyle = "rgba(23, 32, 26, 0.06)";
+      ctx.strokeStyle = "rgba(10, 10, 10, 0.05)";
       ctx.lineWidth = 1;
       ctx.beginPath();
       for (let x = 80; x < w; x += 80) { ctx.moveTo(x + 0.5, 0); ctx.lineTo(x + 0.5, h); }
