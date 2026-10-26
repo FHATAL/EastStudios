@@ -158,12 +158,7 @@ h2 {
 
 /* ---------- Hero ---------- */
 
-.hero {
-  min-height: 100vh;
-  min-height: 100svh;
-  display: flex; flex-direction: column; justify-content: flex-end;
-  padding: 140px 0 64px;
-}
+.hero { padding: clamp(128px, 14vw, 184px) 0 clamp(56px, 7vw, 96px); }
 
 .hero__title {
   font-size: clamp(3.1rem, 9.6vw, 8.8rem);
@@ -583,7 +578,7 @@ h2 {
   .nav__inner, .nav.is-scrolled .nav__inner { height: 64px; grid-template-columns: 1fr auto; }
   .nav__links, .nav__contact { display: none; }
   .nav__toggle { display: inline-flex; }
-  .hero { min-height: 0; padding: 128px 0 56px; }
+  .hero { padding: 120px 0 56px; }
   .hero__lede { font-size: 1.08rem; }
   .stats__grid { grid-template-columns: repeat(2, 1fr); }
   .stat { padding: 26px 0; }
