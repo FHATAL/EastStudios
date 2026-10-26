@@ -7,7 +7,7 @@ Static homepage for East Studios Oy (eaststudios.fi). No build step, no dependen
 - `main.js` - procedural topographic maps (simplex noise + marching squares), scroll reveals, counters, nav, copy-email
 - `favicon.svg`
 
-The contour maps in the hero, contact section and device mockups are generated in the browser, so there are no image assets to maintain. Motion respects `prefers-reduced-motion`, and the page is fully readable without JavaScript.
+The contour maps in the Topo Maps section and its device mockups are generated in the browser, so there are no image assets to maintain. Motion respects `prefers-reduced-motion`, and the page is fully readable without JavaScript.
 
 ## Before going live
 

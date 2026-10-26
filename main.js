@@ -137,7 +137,6 @@
     let visible = false, raf = 0, last = 0;
 
     const pointer = { x: -9999, y: -9999, tx: -9999, ty: -9999, amp: 0, tAmp: 0 };
-    const readout = o.readout;
 
     function resize() {
       ({ ctx, w, h } = sizeCanvas(canvas));
@@ -208,7 +207,6 @@
         const x = e.clientX - r.left, y = e.clientY - r.top;
         if (pointer.amp < 0.01) { pointer.x = x; pointer.y = y; }
         pointer.tx = x; pointer.ty = y; pointer.tAmp = 0.34;
-        if (readout) readout(x / r.width, y / r.height, sample(x, y));
       });
       host.addEventListener("pointerleave", () => { pointer.tAmp = 0; });
     }
@@ -320,26 +318,8 @@
     }).observe(canvas);
   }
 
-  /* ---------------------------------------------------------------
-   * Hero readout: cursor position as coordinates around Helsinki
-   * ------------------------------------------------------------- */
-  const latEl = document.querySelector("[data-lat]");
-  const lonEl = document.querySelector("[data-lon]");
-  const eleEl = document.querySelector("[data-ele]");
-  function heroReadout(fx, fy, v) {
-    if (!latEl) return;
-    const lat = 60.1699 + (0.5 - fy) * 0.045;
-    const lon = 24.9384 + (fx - 0.5) * 0.09;
-    latEl.textContent = `${lat.toFixed(5)}° N`;
-    lonEl.textContent = `${lon.toFixed(5)}° E`;
-    eleEl.textContent = `${Math.max(0, Math.round((v + 0.6) * 48))} m`;
-  }
-
   document.querySelectorAll("[data-contours]").forEach((canvas) => {
-    const calm = canvas.hasAttribute("data-calm");
-    ContourField(canvas, calm
-      ? { seed: 11, scale: 0.0017, speed: 0.012, alpha: 0.75, cell: 11 }
-      : { seed: 3, interactive: true, readout: heroReadout });
+    ContourField(canvas, { seed: 3, interactive: true, alpha: 0.85 });
   });
 
   document.querySelectorAll("[data-static-map]").forEach(StaticMap);
@@ -395,7 +375,7 @@
   function onScroll() {
     const y = window.scrollY;
     nav.classList.toggle("is-scrolled", y > 24);
-    nav.classList.toggle("is-hidden", y > 400 && y > lastY + 4);
+    nav.classList.toggle("is-hidden", y > 400 && y > lastY + 4 && !nav.classList.contains("is-open"));
     if (y < lastY - 4 || y <= 400) nav.classList.remove("is-hidden");
     lastY = y;
     ticking = false;
@@ -404,6 +384,47 @@
     if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
   }, { passive: true });
   onScroll();
+
+  /* ---------------------------------------------------------------
+   * Mobile menu
+   * ------------------------------------------------------------- */
+  const toggle = document.querySelector("[data-menu-toggle]");
+  const menu = document.querySelector("[data-menu]");
+  const toggleLabel = toggle.querySelector(".nav__toggle-label");
+
+  function setMenu(open) {
+    toggle.setAttribute("aria-expanded", String(open));
+    toggleLabel.textContent = open ? "Close" : "Menu";
+    nav.classList.toggle("is-open", open);
+    document.documentElement.style.overflow = open ? "hidden" : "";
+    if (open) {
+      menu.hidden = false;
+      requestAnimationFrame(() => menu.classList.add("is-visible"));
+    } else {
+      menu.classList.remove("is-visible");
+      menu.hidden = true;
+    }
+  }
+  toggle.addEventListener("click", () => setMenu(toggle.getAttribute("aria-expanded") !== "true"));
+  menu.addEventListener("click", (e) => { if (e.target.closest("a")) setMenu(false); });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !menu.hidden) { setMenu(false); toggle.focus(); }
+  });
+  window.matchMedia("(min-width: 721px)").addEventListener("change", (e) => { if (e.matches) setMenu(false); });
+
+  /* ---------------------------------------------------------------
+   * Highlight the nav link of the section in view
+   * ------------------------------------------------------------- */
+  const navLinks = [...document.querySelectorAll(".nav__links a")];
+  const sections = navLinks.map((a) => document.querySelector(a.getAttribute("href"))).filter(Boolean);
+  const sectionIO = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const link = navLinks.find((a) => a.getAttribute("href") === `#${entry.target.id}`);
+      if (entry.isIntersecting) link.setAttribute("aria-current", "true");
+      else link.removeAttribute("aria-current");
+    });
+  }, { rootMargin: "-45% 0px -50% 0px" });
+  sections.forEach((el) => sectionIO.observe(el));
 
   /* ---------------------------------------------------------------
    * Copy email

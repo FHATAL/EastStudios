@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>East Studios - Apps for maps and nature, made in Helsinki</title>
-  <meta name="description" content="East Studios is an independent app studio from Helsinki, Finland. Makers of Topo Maps for iOS and macOS and Bird Guide - Finland.">
+  <title>East Studios - Independent software company from Helsinki</title>
+  <meta name="description" content="East Studios is an independent software company from Helsinki, Finland. We make apps for iPhone, iPad and Mac, including Topo Maps and Bird Guide - Finland.">
   <meta name="theme-color" content="#ffffff">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="East Studios">
-  <meta property="og:description" content="Independent app studio from Helsinki. Makers of Topo Maps and Bird Guide - Finland.">
+  <meta property="og:description" content="Independent software company from Helsinki. Makers of Topo Maps and Bird Guide - Finland.">
   <meta property="og:url" content="https://eaststudios.fi/">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,54 +38,75 @@
     <div class="nav__inner wrap">
       <a class="brand" href="#top" aria-label="East Studios, back to top">
         <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true">
-          <rect x="1" y="1" width="30" height="30" rx="8" fill="currentColor"/>
-          <path d="M9 10.5c4-2.2 10-2.2 14 0M9 16c4-2.2 10-2.2 14 0M9 21.5c4-2.2 10-2.2 14 0" fill="none" stroke="var(--paper)" stroke-width="2" stroke-linecap="round"/>
+          <rect width="32" height="32" rx="7" fill="currentColor"/>
+          <rect x="8" y="8" width="16" height="3.5" rx="1" fill="var(--paper)"/>
+          <rect x="8" y="14.25" width="11" height="3.5" rx="1" fill="var(--paper)"/>
+          <rect x="8" y="20.5" width="16" height="3.5" rx="1" fill="var(--paper)"/>
         </svg>
-        <span>East Studios</span>
+        <span class="brand__name">East Studios</span>
       </a>
+
       <nav class="nav__links" aria-label="Primary">
-        <a href="#apps">Apps</a>
+        <a href="#topo">Topo Maps</a>
+        <a href="#bird">Bird Guide</a>
         <a href="#about">About</a>
-        <a href="#contact" class="nav__cta">Contact</a>
       </nav>
+
+      <a class="nav__contact" href="#contact">Contact</a>
+
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="menu" data-menu-toggle>
+        <span class="nav__toggle-label">Menu</span>
+        <span class="nav__burger" aria-hidden="true"><i></i><i></i></span>
+      </button>
+    </div>
+
+    <div class="menu" id="menu" data-menu hidden>
+      <nav class="menu__links wrap" aria-label="Mobile">
+        <a href="#topo">Topo Maps</a>
+        <a href="#bird">Bird Guide</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <p class="menu__foot wrap">support@eaststudios.fi</p>
     </div>
   </header>
 
   <main id="main">
     <!-- HERO -->
     <section class="hero" id="top">
-      <canvas class="hero__map" data-contours aria-hidden="true"></canvas>
-      <div class="hero__fade" aria-hidden="true"></div>
-
-      <div class="hero__readout mono" aria-hidden="true">
-        <div><span class="k">LAT</span> <span data-lat>60.16990° N</span></div>
-        <div><span class="k">LON</span> <span data-lon>24.93840° E</span></div>
-        <div><span class="k">ELE</span> <span data-ele>34 m</span></div>
-      </div>
-
-      <div class="hero__content wrap">
+      <div class="wrap">
         <h1 class="hero__title">
-          <span class="line"><span class="reveal-up">Maps and field</span></span>
-          <span class="line"><span class="reveal-up" style="--d:.08s">guides for people</span></span>
-          <span class="line"><span class="reveal-up" style="--d:.16s">who go outside.</span></span>
+          <span class="line"><span class="reveal-up">Independent</span></span>
+          <span class="line"><span class="reveal-up" style="--d:.08s">software company</span></span>
+          <span class="line"><span class="reveal-up" style="--d:.16s">from Helsinki.</span></span>
         </h1>
-        <p class="hero__lede reveal" style="--d:.3s">
-          East Studios makes apps for iPhone, iPad and Mac. Over 20 apps built so far,
-          six of them available today. Each one designed, built and maintained in Finland.
-        </p>
-        <div class="hero__actions reveal" style="--d:.4s">
-          <a class="btn btn--solid" href="#topo">See our apps</a>
-          <a class="btn btn--ghost" href="#contact">Get in touch</a>
-        </div>
-      </div>
 
-      <div class="hero__legend wrap mono" aria-hidden="true">
-        <div class="scale">
-          <div class="scale__bar"><i></i><i></i><i></i><i></i></div>
-          <div class="scale__labels"><span>0</span><span>250</span><span>500 m</span></div>
+        <div class="hero__grid">
+          <div class="hero__intro">
+            <p class="hero__lede reveal" style="--d:.3s">
+              East Studios designs, builds and maintains apps for iPhone, iPad and Mac.
+              Since 2014 we've made over 20 apps, and six of them are available today.
+            </p>
+            <div class="hero__actions reveal" style="--d:.4s">
+              <a class="btn btn--solid" href="#apps">See our apps</a>
+              <a class="btn btn--ghost" href="#contact">Get in touch</a>
+            </div>
+          </div>
+
+          <div class="hero__apps reveal" style="--d:.45s">
+            <p class="hero__apps-h">Current projects</p>
+            <a class="app-row" href="#topo">
+              <span class="app-icon app-icon--topo" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M-4 46c10-6 16 2 26-4s10-16 22-18 16 6 24 2"/><path d="M-4 36c8-5 14 1 22-3s9-14 20-16 15 3 30-1"/><ellipse cx="38" cy="30" rx="7" ry="4.5"/><ellipse cx="38" cy="30" rx="13" ry="9"/><path d="M-4 56c12-6 22 0 34-3s18-9 38-6"/></svg></span>
+              <span class="app-row__text"><b>Topo Maps</b><span>Topographic maps for iOS and macOS</span></span>
+              <span class="app-row__arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+            </a>
+            <a class="app-row" href="#bird">
+              <span class="app-icon app-icon--bird" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M14 40c6 0 10-3 13-8 3-6 8-11 15-11 4 0 7 2 8 5l5 1-5 3c0 9-7 17-19 17-7 0-13-2-17-7z"/><circle cx="45" cy="25" r="1.6" class="eye"/></svg></span>
+              <span class="app-row__text"><b>Bird Guide - Finland</b><span>The birds of Finnish nature for iOS</span></span>
+              <span class="app-row__arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+            </a>
+          </div>
         </div>
-        <div class="legend__note">Contour interval 5 m</div>
-        <svg class="north" viewBox="0 0 24 40"><path d="M12 2 20 30 12 24 4 30Z" fill="currentColor"/><text x="12" y="39" text-anchor="middle">N</text></svg>
       </div>
     </section>
 
@@ -95,12 +116,13 @@
         <div class="stat reveal"><span class="stat__num" data-count="2014" data-plain>2014</span><span class="stat__label">Founded in Helsinki</span></div>
         <div class="stat reveal" style="--d:.06s"><span class="stat__num"><span data-count="20">20</span>+</span><span class="stat__label">Apps built</span></div>
         <div class="stat reveal" style="--d:.12s"><span class="stat__num" data-count="6">6</span><span class="stat__label">Available today</span></div>
-        <div class="stat reveal" style="--d:.18s"><span class="stat__num"><span data-count="15">15</span>+</span><span class="stat__label">Countries mapped</span></div>
+        <div class="stat reveal" style="--d:.18s"><span class="stat__num" data-count="3">3</span><span class="stat__label">Platforms: iPhone, iPad, Mac</span></div>
       </div>
     </section>
 
     <!-- TOPO MAPS -->
     <section class="product product--topo" id="apps">
+      <canvas class="product__map" data-contours aria-hidden="true"></canvas>
       <div class="wrap" id="topo">
         <header class="section-head">
           <div class="section-head__row">
@@ -323,7 +345,6 @@
 
     <!-- CONTACT -->
     <section class="contact" id="contact">
-      <canvas class="contact__map" data-contours data-calm aria-hidden="true"></canvas>
       <div class="wrap contact__inner">
         <h2 class="reveal">Questions about our apps,<br>or something else?</h2>
         <div class="mail reveal">
